@@ -1,0 +1,49 @@
+syntax = "proto3";
+option java_multiple_files = true;
+
+package Server.databaseOperations;
+
+
+
+message GetPackageFromAnimalNumberRequest {
+  string animalNumber = 1;
+}
+
+message GetAnimalFromPackageNumberRequest {
+  string packNumber = 1;
+}
+
+message APIResponse {
+  string responseMessage = 1;
+  string responseCode = 2;
+  string data = 3;
+}
+
+message RegistrateAnimalRequest {
+  string registrationNumber = 1;
+  int32 weight = 2;
+  string origin = 3;
+}
+
+message RegistratePackageRequest {
+  string Destination = 1;
+}
+
+message registratePartRequest {
+  int32 originAnimal = 1;
+  string type = 2;
+  int32 weight = 3;
+  int32 packageNum = 4;
+}
+
+service DatabaseOperationService
+{
+  rpc getPackageFromAnimalNumber(GetPackageFromAnimalNumberRequest) returns (APIResponse);
+  rpc getAnimalFromPackageNumber(GetAnimalFromPackageNumberRequest) returns (APIResponse);
+  rpc registrateAnimal(RegistrateAnimalRequest) returns (APIResponse);
+  rpc registratePackage(RegistratePackageRequest) returns (APIResponse);
+  rpc registratePart(registratePartRequest) returns (APIResponse);
+
+
+}
+
