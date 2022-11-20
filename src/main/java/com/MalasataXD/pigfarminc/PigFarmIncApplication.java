@@ -2,8 +2,10 @@ package com.MalasataXD.pigfarminc;
 
 import com.MalasataXD.Application.LogicImpl.AnimalLogicImpl;
 import com.MalasataXD.Application.LogicImpl.PackageLogicImpl;
+import com.MalasataXD.Application.LogicImpl.TrayLogicImpl;
 import com.MalasataXD.Application.LogicInterfaces.IAnimalLogic;
 import com.MalasataXD.Application.LogicInterfaces.IPackageLogic;
+import com.MalasataXD.Application.LogicInterfaces.ITrayLogic;
 import com.MalasataXD.Configuration.AnimalConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -23,6 +25,8 @@ public class PigFarmIncApplication {
         IAnimalLogic animalLogic = ctx.getBean(AnimalLogicImpl.class);
 
         IPackageLogic packageLogic = ctx.getBean(PackageLogicImpl.class);
+
+        ITrayLogic trayLogic = ctx.getBean(TrayLogicImpl.class);
 
         // # Starts the WebAPI
         SpringApplication.run(PigFarmIncApplication.class, args);

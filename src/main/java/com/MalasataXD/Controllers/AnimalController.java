@@ -27,16 +27,12 @@ public class AnimalController
     {
         animalLogic.CreateAnimal(dto);
     }
-
-
-
     @PostMapping(path = "/animal/part")
     @ResponseStatus(HttpStatus.CREATED)
     public void create(@RequestBody PartCreationDTO dto)
     {
         animalLogic.CreatePart(dto);
     }
-
     @GetMapping(value = "/animal")
     public String read(@RequestParam(required = false) int animalNumber){
         return animalLogic.GetPackageFromAnimalNum(animalNumber);

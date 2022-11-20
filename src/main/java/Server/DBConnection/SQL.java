@@ -28,7 +28,7 @@ public class SQL implements DBConnectionInterface{
     }
 
 
-    public ArrayList<String> getPackFromAnimalNumber(String AnimalNumber) throws SQLException{
+    public ArrayList<String> getPackageFromAnimalNumber(int AnimalNumber) throws SQLException{
        ArrayList<String> arrayList = new ArrayList<>();
        arrayList.add("PackageNum");
 
@@ -39,7 +39,7 @@ public class SQL implements DBConnectionInterface{
              "where A2.RegistrationNum = " + "'" + AnimalNumber + "'" + ";" , arrayList);
     }
 
-    public ArrayList<String> getAnimalFromPackNumber(String PackNumber) throws SQLException{
+    public ArrayList<String> getAnimalFromPackageNumber(int PackNumber) throws SQLException{
         ArrayList<String> arrayList = new ArrayList<>();
         arrayList.add("RegistrationNum");
 
@@ -50,16 +50,52 @@ public class SQL implements DBConnectionInterface{
                 "where P2.PackageNum = " + "'" + PackNumber + "'" + ";" , arrayList);
     }
 
-    public void RegistrateAnimal(String registrationNumber, String weight, String origin) throws SQLException{
-        insertInto("insert into animal values (" + "'" + registrationNumber + "'" + ", " + "'" + weight + "'" + ", " + "'" + origin + "'" + ");");
+    @Override
+    public ArrayList<String> getPartsFromTrayNumber(int trayNumber) throws SQLException {
+        ArrayList<String> arrayList = new ArrayList<>();
+        arrayList.add("PartNum");
+
+
+        return selectFromSQL("select *\n" +
+                "from Part\n" +
+                "where TrayNum = " + trayNumber + ";", arrayList);
     }
 
-    public void RegistratePakke(String destination) throws SQLException{
+    public void registrateAnimal(int registrationNumber, int weight, String origin, String date) throws SQLException{
+        insertInto("insert into animal values (" + "'" + registrationNumber + "'" + ", " + "'" + weight + "'" + ", " + "'" + origin + "'" + ", " + "'" + date + "'" + ");");
+    }
+
+    public void registratePackage(String destination) throws SQLException{
         insertInto("insert into package (Destination) values (" + "'" + destination + "'" + ");");
     }
 
-    public void RegistratePart(String originAnimal, String type, String weight, String packageNum) throws SQLException{
-        insertInto("insert into Part (OriginAnimal, Type, Weight, PackageNum) values (" + "'" + originAnimal + "'" + ", " + "'" + type + "'" + ", " + "'" + weight + "'" +", " + "'" +packageNum + "'" + ");");
+    public void registratePart(int originAnimal, String type, int weight) throws SQLException{
+        insertInto("insert into Part (OriginAnimal, Type, Weight) values (" + "'" + originAnimal + "'" + ", " + "'" + type + "'" + ", " + "'" + weight + "'"  + ");");
+    }
+
+    @Override
+    public void addPartToPackage(int partNumber, int packageNumber) throws SQLException {
+        insertInto("update part\n" +
+                "set PackageNum = " + packageNumber +"\n" +
+                "where PartNum = " + partNumber + ";");
+    }
+
+    @Override
+    public void addPartToTray(int partNumber, int trayNumber) throws SQLException {
+        insertInto("update part\n" +
+                "set PackageNum = null\n" +
+                "where PartNum = " + partNumber + ";");
+
+
+        insertInto("update part\n" +
+                "set TrayNum = " + trayNumber +"\n" +
+                "where PartNum = " + partNumber + ";");
+
+    }
+
+    @Override
+    public void addTray(String typeOfPart, int weight) throws SQLException {
+        insertInto("insert into tray (weight, TypeOfPart) values (" + weight + ", '" + typeOfPart + "');");
     }
 
     // # Gets information from the database, by performing a statement

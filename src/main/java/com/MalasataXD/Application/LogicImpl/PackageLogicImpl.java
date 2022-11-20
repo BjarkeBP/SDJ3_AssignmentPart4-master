@@ -20,7 +20,12 @@ public class PackageLogicImpl implements IPackageLogic {
     }
 
     @Override
+    public void addPartToPackage(int partNumber, int packageNumber) {
+        PackageDao.addPartToPackage(partNumber, packageNumber);
+    }
+
+    @Override
     public String getAnimalFromPackNumber(int packageNumber) {
-        return PackageDao.getAnimalFromPackNumber(packageNumber);
+        return PackageDao.GetAnimalFromPackNumber(packageNumber);
     }
 }

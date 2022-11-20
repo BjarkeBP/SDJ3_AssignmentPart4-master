@@ -1,7 +1,6 @@
 package com.MalasataXD.Controllers;
 
 
-import com.MalasataXD.Application.LogicInterfaces.IAnimalLogic;
 import com.MalasataXD.Application.LogicInterfaces.IPackageLogic;
 import com.MalasataXD.Domain.DTOs.PackageCreationDTO;
 import org.springframework.http.HttpStatus;
@@ -23,9 +22,15 @@ public class PackageController {
     {
         PackageLogic.CreatePackage(dto);
     }
-
     @GetMapping(value = "/package")
-    public String read(@RequestParam(required = false) String packageNumber){
-        return PackageLogic.getAnimalFromPackNumber(Integer.parseInt(packageNumber));
+    public String read(@RequestParam(required = false) int packageNumber){
+        return PackageLogic.getAnimalFromPackNumber(packageNumber);
     }
+
+    @GetMapping(value = "/packageAddPart")
+    public void read(@RequestParam(required = false) int parkNumber, int packageNumber){
+        PackageLogic.addPartToPackage(parkNumber, packageNumber);
+    }
+
+
 }

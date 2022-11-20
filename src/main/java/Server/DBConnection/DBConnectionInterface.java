@@ -5,9 +5,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface DBConnectionInterface {
-    public ArrayList<String> getPackFromAnimalNumber(String AnimalNumber) throws SQLException;
-    public ArrayList<String> getAnimalFromPackNumber(String PackNumber) throws SQLException;
-    public void RegistrateAnimal(String registrationNumber, String weight, String origin) throws SQLException;
-    public void RegistratePakke(String destination) throws SQLException;
-    public void RegistratePart(String originAnimal, String type, String weight, String packageNum) throws SQLException;
+    public ArrayList<String> getPackageFromAnimalNumber(int AnimalNumber) throws SQLException;
+    public ArrayList<String> getAnimalFromPackageNumber(int PackNumber) throws SQLException;
+    public ArrayList<String> getPartsFromTrayNumber(int trayNumber) throws SQLException;
+    public void registrateAnimal(int registrationNumber, int weight, String origin, String date) throws SQLException;
+    public void registratePackage(String destination) throws SQLException;
+    public void registratePart(int originAnimal, String type, int weight) throws SQLException;
+    public void addPartToPackage(int partNumber, int packageNumber) throws SQLException;
+    public void addPartToTray(int partNumber, int trayNumber) throws SQLException;
+    public void addTray(String typeOfPart, int weight) throws SQLException;
+
 }

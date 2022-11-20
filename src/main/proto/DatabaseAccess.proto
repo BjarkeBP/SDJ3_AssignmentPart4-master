@@ -6,11 +6,15 @@ package Server.databaseOperations;
 
 
 message GetPackageFromAnimalNumberRequest {
-  string animalNumber = 1;
+  int32 animalNumber = 1;
 }
 
 message GetAnimalFromPackageNumberRequest {
-  string packNumber = 1;
+  int32 packNumber = 1;
+}
+
+message GetPartsFromTrayNumberRequest{
+  int32 trayNumber = 1;
 }
 
 message APIResponse {
@@ -20,30 +24,47 @@ message APIResponse {
 }
 
 message RegistrateAnimalRequest {
-  string registrationNumber = 1;
+  int32 registrationNumber = 1;
   int32 weight = 2;
   string origin = 3;
+  string date = 4;
 }
 
 message RegistratePackageRequest {
   string Destination = 1;
 }
 
-message registratePartRequest {
+message RegistratePartRequest {
   int32 originAnimal = 1;
   string type = 2;
   int32 weight = 3;
-  int32 packageNum = 4;
+}
+
+message AddPartToPackageRequest {
+  int32 partNumber = 1;
+  int32 packageNumber = 2;
+}
+
+message AddPartToTrayRequest{
+  int32 partNumber = 1;
+  int32 trayNumber = 2;
+}
+
+message AddTrayRequest{
+  string typeOfPart = 1;
+  int32 weight = 2;
 }
 
 service DatabaseOperationService
 {
   rpc getPackageFromAnimalNumber(GetPackageFromAnimalNumberRequest) returns (APIResponse);
   rpc getAnimalFromPackageNumber(GetAnimalFromPackageNumberRequest) returns (APIResponse);
+  rpc getPartsFromTrayNumber(GetPartsFromTrayNumberRequest) returns (APIResponse);
   rpc registrateAnimal(RegistrateAnimalRequest) returns (APIResponse);
   rpc registratePackage(RegistratePackageRequest) returns (APIResponse);
-  rpc registratePart(registratePartRequest) returns (APIResponse);
-
-
+  rpc registratePart(RegistratePartRequest) returns (APIResponse);
+  rpc addPartToPackage(AddPartToPackageRequest) returns (APIResponse);
+  rpc addPartToTray(AddPartToTrayRequest) returns (APIResponse);
+  rpc addTray(AddTrayRequest) returns (APIResponse);
 }
 

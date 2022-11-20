@@ -5,14 +5,13 @@ public class PartCreationDTO {
     private int OriginAnimal;
     private String Type;
     private int Weight;
-    private int packageNum;
 
 
-    public PartCreationDTO(int originAnimal, String type, int weight, int packageNum) {
+
+    public PartCreationDTO(int originAnimal, String type, int weight) {
         OriginAnimal = originAnimal;
         Type = type;
         Weight = weight;
-        this.packageNum = packageNum;
     }
 
     public int getOriginAnimal() {
@@ -27,7 +26,4 @@ public class PartCreationDTO {
         return Weight;
     }
 
-    public int getPackageNum() {
-        return packageNum;
-    }
 }
