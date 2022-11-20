@@ -1,0 +1,40 @@
+create schema "animalsystem";
+
+set search_path = animalsystem;
+
+create table Animal
+(
+    RegistrationNum int,
+    weight int,
+    origin varchar,
+    date date,
+    primary key (RegistrationNum)
+);
+
+create table Package
+(
+    PackageNum serial,
+    Destination varchar,
+    PRIMARY KEY (PackageNum)
+);
+
+create table Tray(
+    TrayNum serial,
+    weight int,
+    TypeOfPart varchar,
+    primary key (TrayNum)
+);
+
+create table Part
+(
+    PartNum  serial,
+    OriginAnimal int,
+    type varchar(10),
+    weight int,
+    PackageNum int,
+    TrayNum int,
+    foreign key (TrayNum) references  Tray(TrayNum),
+    foreign key (OriginAnimal) references Animal(RegistrationNum),
+    foreign key (PackageNum) references Package(PackageNum),
+    primary key (PartNum)
+);
